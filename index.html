@@ -5,101 +5,138 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>選舉投票</title> <!-- 修改頁面標題 -->
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        h1 { text-align: center; }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
 
-        /* 讓候選人以三欄方式顯示 */
-        #candidates {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr); /* 三欄佈局 */
-            gap: 20px; /* 欄位間距 */
+        h1 {
+            text-align: center;
+        }
+
+        /* 表格樣式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
             margin-top: 20px;
         }
 
-        .candidate {
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .button:disabled {
+            background-color: #cccccc;
+        }
+
+        /* 禁止表單提交的樣式 */
+        .vote-form {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
         }
 
-        .candidate input {
-            margin-right: 10px;
+        .candidate-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
         }
 
-        .button { 
-            padding: 10px 20px; 
-            background-color: #4CAF50; 
-            color: white; 
-            border: none; 
-            cursor: pointer; 
-            margin-top: 20px;
-        }
-
-        .button:disabled { 
-            background-color: #cccccc; 
+        .candidate-row input[type="checkbox"] {
+            margin-left: 10px;
         }
     </style>
 </head>
 <body>
-    <h1>從 52 位候選人中選擇 11 位</h1>
+    <h1>選舉投票</h1>
 
-    <form id="vote-form">
+    <form id="vote-form" class="vote-form">
         <div id="candidates">
-            <!-- 這裡會動態生成候選人選項 -->
+            <!-- 動態生成候選人選項 -->
+            <div class="candidate-row">
+                <span>教務主任</span><span>林招蓉</span><input type="checkbox" id="candidate1">
+            </div>
+            <div class="candidate-row">
+                <span>學務主任</span><span>崔倩筠</span><input type="checkbox" id="candidate2">
+            </div>
+            <div class="candidate-row">
+                <span>總務主任</span><span>陳信劭</span><input type="checkbox" id="candidate3">
+            </div>
+            <div class="candidate-row">
+                <span>輔導主任</span><span>陳鵬元</span><input type="checkbox" id="candidate4">
+            </div>
+            <div class="candidate-row">
+                <span>教學組長</span><span>陳佩君</span><input type="checkbox" id="candidate5">
+            </div>
+            <div class="candidate-row">
+                <span>衛生組長</span><span>吳佩蓁</span><input type="checkbox" id="candidate6">
+            </div>
+            <div class="candidate-row">
+                <span>訓育組長</span><span>朱韻儒</span><input type="checkbox" id="candidate7">
+            </div>
+            <div class="candidate-row">
+                <span>體育組長</span><span>鄭仲哲</span><input type="checkbox" id="candidate8">
+            </div>
+            <div class="candidate-row">
+                <span>生教組長</span><span>賴美樺</span><input type="checkbox" id="candidate9">
+            </div>
+            <div class="candidate-row">
+                <span>出納組長</span><span>蔡梅燕</span><input type="checkbox" id="candidate10">
+            </div>
         </div>
-        <button type="button" class="button" id="submit-vote" onclick="submitVote()" disabled>提交投票</button>
+        <button type="button" class="button" id="submit-vote" onclick="submitVote()">提交投票</button>
     </form>
 
     <script>
-        const candidateNames = [
-            "候選人1", "候選人2", "候選人3", "候選人4", "候選人5", "候選人6", "候選人7", "候選人8", "候選人9", "候選人10",
-            "候選人11", "候選人12", "候選人13", "候選人14", "候選人15", "候選人16", "候選人17", "候選人18", "候選人19", "候選人20",
-            "候選人21", "候選人22", "候選人23", "候選人24", "候選人25", "候選人26", "候選人27", "候選人28", "候選人29", "候選人30",
-            "候選人31", "候選人32", "候選人33", "候選人34", "候選人35", "候選人36", "候選人37", "候選人38", "候選人39", "候選人40",
-            "候選人41", "候選人42", "候選人43", "候選人44", "候選人45", "候選人46", "候選人47", "候選人48", "候選人49", "候選人50",
-            "候選人51", "候選人52"
-        ];
-
+        // 用來儲存已選擇的候選人
         let selectedCandidates = [];
 
-        // 渲染候選人選項
-        function renderCandidates() {
-            const candidatesDiv = document.getElementById("candidates");
-            candidateNames.forEach((candidate, index) => {
-                const div = document.createElement("div");
-                div.classList.add("candidate");
-                div.innerHTML = `<input type="checkbox" id="candidate${index}" value="${candidate}" onclick="updateSelection()">
-                <label for="candidate${index}">${candidate}</label>`;
-                candidatesDiv.appendChild(div);
-            });
-        }
-
-        // 更新選擇數量
+        // 監聽每個選項的勾選事件
         function updateSelection() {
             selectedCandidates = [];
             const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
             checkboxes.forEach(checkbox => {
-                selectedCandidates.push(checkbox.value);
+                selectedCandidates.push(checkbox.id); // 儲存已選擇的候選人ID
             });
 
-            // 限制最多選 11 個
-            if (selectedCandidates.length > 11) {
-                alert("最多只能選擇 11 位候選人！");
-                document.getElementById(`candidate${selectedCandidates[selectedCandidates.length - 1]}`).checked = false;
+            // 限制最多選擇 5 個
+            if (selectedCandidates.length > 5) {
+                alert("最多只能選擇 5 位候選人！");
+                document.getElementById(selectedCandidates[selectedCandidates.length - 1]).checked = false;
                 return;
             }
 
-            document.getElementById("submit-vote").disabled = selectedCandidates.length !== 11;
+            document.getElementById("submit-vote").disabled = selectedCandidates.length === 0;
         }
 
         // 提交投票
         function submitVote() {
-            alert("投票已提交！");
-            // 這裡可以加上送出投票數據到後端的邏輯（如 Google Sheets、Firebase 等）
+            alert("投票已提交！您選擇的候選人是：" + selectedCandidates.join(", "));
+            // 在這裡可以加上數據儲存邏輯，如送往伺服器
         }
 
-        // 頁面初始化
-        renderCandidates();
+        // 初始化：設定勾選框的事件監聽
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', updateSelection);
+        });
     </script>
 </body>
 </html>
