@@ -5,13 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>嘉義市東區興安國民小學114學年度教師成績考核委員會選舉選票 </title>
   <style>
-    body { font-family: Arial; text-align: center; margin: 20px; }
+    body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
     table { width: 80%; margin: 0 auto; border-collapse: collapse; }
     th, td { border: 1px solid #ddd; padding: 12px; }
     th { background-color: #f4f4f4; }
-    .button { padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer; margin: 20px auto; display: block; }
+    .button {
+      padding: 10px 20px; 
+      background-color: #4CAF50; 
+      color: white; 
+      border: none; 
+      cursor: pointer; 
+      margin: 20px auto; 
+      display: block;
+      font-size: 16px;
+    }
     .button:disabled { background-color: #ccc; cursor: not-allowed; }
-    input[type="checkbox"] { width: 20px; height: 20px; }
+    /* Bigger checkboxes */
+    input[type="checkbox"] {
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -20,44 +34,64 @@
   <form id="vote-form" action="https://script.google.com/macros/s/AKfycbxtqxTRFWx7Xnsog2gEhnMQogYOQtnzxDC6SavsviHJiP4kOXdf_iMViuglIF7QPMcn-g/exec" method="POST" target="hiddenFrame">
     <table>
       <thead>
-        <tr><th>職（班）別</th><th>姓名</th><th>圈選欄</th></tr>
+        <tr>
+          <th>職（班）別</th><th>姓名</th><th>圈選欄</th>
+          <th>職（班）別</th><th>姓名</th><th>圈選欄</th>
+        </tr>
       </thead>
       <tbody>
-        <tr><td>教務主任</td><td>林招蓉</td><td><input type="checkbox" value="林招蓉" onclick="updateSelection()"></td></tr>
-        <tr><td>學務主任</td><td>崔倩筠</td><td><input type="checkbox" value="崔倩筠" onclick="updateSelection()"></td></tr>
-        <tr><td>總務主任</td><td>陳信劭</td><td><input type="checkbox" value="陳信劭" onclick="updateSelection()"></td></tr>
-        <tr><td>輔導主任</td><td>陳鵬元</td><td><input type="checkbox" value="陳鵬元" onclick="updateSelection()"></td></tr>
-        <tr><td>教學組長</td><td>陳佩君</td><td><input type="checkbox" value="陳佩君" onclick="updateSelection()"></td></tr>
-        <tr><td>衛生組長</td><td>吳佩蓁</td><td><input type="checkbox" value="吳佩蓁" onclick="updateSelection()"></td></tr>
-        <tr><td>訓育組長</td><td>朱韻儒</td><td><input type="checkbox" value="朱韻儒" onclick="updateSelection()"></td></tr>
-        <tr><td>體育組長</td><td>鄭仲哲</td><td><input type="checkbox" value="鄭仲哲" onclick="updateSelection()"></td></tr>
-        <tr><td>生教組長</td><td>賴美樺</td><td><input type="checkbox" value="賴美樺" onclick="updateSelection()"></td></tr>
-        <tr><td>出納組長</td><td>蔡梅燕</td><td><input type="checkbox" value="蔡梅燕" onclick="updateSelection()"></td></tr>
-        <tr><td>資訊組長</td><td>楊善涵</td><td><input type="checkbox" value="楊善涵" onclick="updateSelection()"></td></tr>
-        <tr><td>文書組長</td><td>陳怡君</td><td><input type="checkbox" value="陳怡君" onclick="updateSelection()"></td></tr>
-        <tr><td>輔導組長</td><td>朱家薇</td><td><input type="checkbox" value="朱家薇" onclick="updateSelection()"></td></tr>
-        <tr><td>資料組長</td><td>陳婉如</td><td><input type="checkbox" value="陳婉如" onclick="updateSelection()"></td></tr>
-        <tr><td>食育組長</td><td>曾志華</td><td><input type="checkbox" value="曾志華" onclick="updateSelection()"></td></tr>
-        <tr><td>特教教師</td><td>蔡宜真</td><td><input type="checkbox" value="蔡宜真" onclick="updateSelection()"></td></tr>
-        <tr><td>特教教師</td><td>吳寶鳳</td><td><input type="checkbox" value="吳寶鳳" onclick="updateSelection()"></td></tr>
-        <tr><td>專任輔導教師</td><td>謝欣紜</td><td><input type="checkbox" value="謝欣紜" onclick="updateSelection()"></td></tr>
-        <tr><td>1年1班</td><td>洪淑慧</td><td><input type="checkbox" value="洪淑慧" onclick="updateSelection()"></td></tr>
-        <tr><td>1年2班</td><td>張宇君</td><td><input type="checkbox" value="張宇君" onclick="updateSelection()"></td></tr>
-        <tr><td>1年3班</td><td>方子綾</td><td><input type="checkbox" value="方子綾" onclick="updateSelection()"></td></tr>
-        <tr><td>1年4班</td><td>林韋珺</td><td><input type="checkbox" value="林韋珺" onclick="updateSelection()"></td></tr>
-        <tr><td>1年5班</td><td>黃淑萍</td><td><input type="checkbox" value="黃淑萍" onclick="updateSelection()"></td></tr>
-        <tr><td>2年2班</td><td>温宜逢</td><td><input type="checkbox" value="温宜逢" onclick="updateSelection()"></td></tr>
-        <tr><td>2年4班</td><td>許嘉舫</td><td><input type="checkbox" value="許嘉舫" onclick="updateSelection()"></td></tr>
-        <tr><td>3年1班</td><td>鄭韻如</td><td><input type="checkbox" value="鄭韻如" onclick="updateSelection()"></td></tr>
-        <tr><td>3年2班</td><td>李晟均</td><td><input type="checkbox" value="李晟均" onclick="updateSelection()"></td></tr>
-        <tr><td>3年3班</td><td>李怡寰</td><td><input type="checkbox" value="李怡寰" onclick="updateSelection()"></td></tr>
-        <tr><td>3年5班</td><td>黃秀慧</td><td><input type="checkbox" value="黃秀慧" onclick="updateSelection()"></td></tr>
-        <tr><td>3年6班</td><td>蘇義發</td><td><input type="checkbox" value="蘇義發" onclick="updateSelection()"></td></tr>
-        <tr><td>4年1班</td><td>楊文菁</td><td><input type="checkbox" value="楊文菁" onclick="updateSelection()"></td></tr>
-        <tr><td>4年2班</td><td>許嘉娜</td><td><input type="checkbox" value="許嘉娜" onclick="updateSelection()"></td></tr>
-        <tr><td>4年3班</td><td>江福生</td><td><input type="checkbox" value="江福生" onclick="updateSelection()"></td></tr>
-        <tr><td>4年5班</td><td>田倚瑄</td><td><input type="checkbox" value="田倚瑄" onclick="updateSelection()"></td></tr>
-        <tr><td>5年1班</td><td>何宥瑩</td><td><input type="checkbox" value="何宥瑩" onclick="updateSelection()"></td></tr>
+        <tr><td>教務主任</td><td>林招蓉</td><td><input type="checkbox" value="林招蓉" onclick="updateSelection()"></td>
+            <td>衛生組長</td><td>吳佩蓁</td><td><input type="checkbox" value="吳佩蓁" onclick="updateSelection()"></td></tr>
+        <tr><td>學務主任</td><td>崔倩筠</td><td><input type="checkbox" value="崔倩筠" onclick="updateSelection()"></td>
+            <td>訓育組長</td><td>朱韻儒</td><td><input type="checkbox" value="朱韻儒" onclick="updateSelection()"></td></tr>
+        <tr><td>總務主任</td><td>陳信劭</td><td><input type="checkbox" value="陳信劭" onclick="updateSelection()"></td>
+            <td>體育組長</td><td>鄭仲哲</td><td><input type="checkbox" value="鄭仲哲" onclick="updateSelection()"></td></tr>
+        <tr><td>輔導主任</td><td>陳鵬元</td><td><input type="checkbox" value="陳鵬元" onclick="updateSelection()"></td>
+            <td>生教組長</td><td>賴美樺</td><td><input type="checkbox" value="賴美樺" onclick="updateSelection()"></td></tr>
+        <tr><td>教學組長</td><td>陳佩君</td><td><input type="checkbox" value="陳佩君" onclick="updateSelection()"></td>
+            <td>出納組長</td><td>蔡梅燕</td><td><input type="checkbox" value="蔡梅燕" onclick="updateSelection()"></td></tr>
+        <tr><td>資訊組長</td><td>楊善涵</td><td><input type="checkbox" value="楊善涵" onclick="updateSelection()"></td>
+            <td>文書組長</td><td>陳怡君</td><td><input type="checkbox" value="陳怡君" onclick="updateSelection()"></td></tr>
+        <tr><td>設備組長</td><td>楊淑惠</td><td><input type="checkbox" value="楊淑惠" onclick="updateSelection()"></td>
+            <td>輔導組長</td><td>朱家薇</td><td><input type="checkbox" value="朱家薇" onclick="updateSelection()"></td></tr>
+        <tr><td>課程註冊組長</td><td>陳瀅如</td><td><input type="checkbox" value="陳瀅如" onclick="updateSelection()"></td>
+            <td>資料組長</td><td>陳婉如</td><td><input type="checkbox" value="陳婉如" onclick="updateSelection()"></td></tr>
+        <tr><td>食育組長</td><td>曾志華</td><td><input type="checkbox" value="曾志華" onclick="updateSelection()"></td>
+            <td>特教教師</td><td>蔡宜真</td><td><input type="checkbox" value="蔡宜真" onclick="updateSelection()"></td></tr>
+        <tr><td>專任輔導教師</td><td>謝欣紜</td><td><input type="checkbox" value="謝欣紜" onclick="updateSelection()"></td>
+            <td>特教教師</td><td>吳寶鳳</td><td><input type="checkbox" value="吳寶鳳" onclick="updateSelection()"></td></tr>
+        <tr><td>1年1班</td><td>洪淑慧</td><td><input type="checkbox" value="洪淑慧" onclick="updateSelection()"></td>
+            <td>5年2班</td><td>黃惠娟</td><td><input type="checkbox" value="黃惠娟" onclick="updateSelection()"></td></tr>
+        <tr><td>1年2班</td><td>張宇君</td><td><input type="checkbox" value="張宇君" onclick="updateSelection()"></td>
+            <td>5年3班</td><td>黃于庭</td><td><input type="checkbox" value="黃于庭" onclick="updateSelection()"></td></tr>
+        <tr><td>1年3班</td><td>方子綾</td><td><input type="checkbox" value="方子綾" onclick="updateSelection()"></td>
+            <td>5年4班</td><td>江品葳</td><td><input type="checkbox" value="江品葳" onclick="updateSelection()"></td></tr>
+        <tr><td>1年4班</td><td>林韋珺</td><td><input type="checkbox" value="林韋珺" onclick="updateSelection()"></td>
+            <td>5年5班</td><td>周思嫣</td><td><input type="checkbox" value="周思嫣" onclick="updateSelection()"></td></tr>
+        <tr><td>1年5班</td><td>黃淑萍</td><td><input type="checkbox" value="黃淑萍" onclick="updateSelection()"></td>
+            <td>5年7班</td><td>施嶸旭</td><td><input type="checkbox" value="施嶸旭" onclick="updateSelection()"></td></tr>
+        <tr><td>2年2班</td><td>温宜逢</td><td><input type="checkbox" value="温宜逢" onclick="updateSelection()"></td>
+            <td>6年1班</td><td>李佩珊</td><td><input type="checkbox" value="李佩珊" onclick="updateSelection()"></td></tr>
+        <tr><td>2年4班</td><td>許嘉舫</td><td><input type="checkbox" value="許嘉舫" onclick="updateSelection()"></td>
+            <td>6年2班</td><td>彭志芸</td><td><input type="checkbox" value="彭志芸" onclick="updateSelection()"></td></tr>
+        <tr><td>3年1班</td><td>鄭韻如</td><td><input type="checkbox" value="鄭韻如" onclick="updateSelection()"></td>
+            <td>6年3班</td><td>謝明宏</td><td><input type="checkbox" value="謝明宏" onclick="updateSelection()"></td></tr>
+        <tr><td>3年2班</td><td>李晟均</td><td><input type="checkbox" value="李晟均" onclick="updateSelection()"></td>
+            <td>6年4班</td><td>邱添丁</td><td><input type="checkbox" value="邱添丁" onclick="updateSelection()"></td></tr>
+        <tr><td>3年3班</td><td>李怡寰</td><td><input type="checkbox" value="李怡寰" onclick="updateSelection()"></td>
+            <td>科任</td><td>陳淑華</td><td><input type="checkbox" value="陳淑華" onclick="updateSelection()"></td></tr>
+        <tr><td>3年5班</td><td>黃秀慧</td><td><input type="checkbox" value="黃秀慧" onclick="updateSelection()"></td>
+            <td>科任</td><td>林怡伶</td><td><input type="checkbox" value="林怡伶" onclick="updateSelection()"></td></tr>
+        <tr><td>3年6班</td><td>蘇義發</td><td><input type="checkbox" value="蘇義發" onclick="updateSelection()"></td>
+            <td>科任</td><td>陳怡君</td><td><input type="checkbox" value="陳怡君" onclick="updateSelection()"></td></tr>
+        <tr><td>4年1班</td><td>楊文菁</td><td><input type="checkbox" value="楊文菁" onclick="updateSelection()"></td>
+            <td>科任</td><td>吳尚真</td><td><input type="checkbox" value="吳尚真" onclick="updateSelection()"></td></tr>
+        <tr><td>4年2班</td><td>許嘉娜</td><td><input type="checkbox" value="許嘉娜" onclick="updateSelection()"></td>
+            <td>科任</td><td>王思蘋</td><td><input type="checkbox" value="王思蘋" onclick="updateSelection()"></td></tr>
+        <tr><td>4年3班</td><td>江福生</td><td><input type="checkbox" value="江福生" onclick="updateSelection()"></td>
+            <td>科任</td><td>傅鈺茹</td><td><input type="checkbox" value="傅鈺茹" onclick="updateSelection()"></td></tr>
+        <tr><td>4年5班</td><td>田倚瑄</td><td><input type="checkbox" value="田倚瑄" onclick="updateSelection()"></td><td></td><td></td><td></td></tr>
+        <tr><td>5年1班</td><td>何宥瑩</td><td><input type="checkbox" value="何宥瑩" onclick="updateSelection()"></td><td></td><td></td><td></td></tr>
       </tbody>
     </table>
 
@@ -73,44 +107,30 @@
     let selectedCandidates = [];
 
     function updateSelection() {
-      const checkboxes = document.querySelectorAll('input[type="checkbox"]');
       selectedCandidates = [];
-
-      checkboxes.forEach(cb => {
-        if(cb.checked) selectedCandidates.push(cb.value);
-      });
+      const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+      checkboxes.forEach(cb => selectedCandidates.push(cb.value));
 
       if (selectedCandidates.length > 11) {
         alert("最多只能選擇 11 位候選人！");
-        // 取消最新勾選（從後往前找第一個勾選的並取消）
-        for (let i = checkboxes.length - 1; i >= 0; i--) {
-          if (checkboxes[i].checked && selectedCandidates.includes(checkboxes[i].value)) {
-            checkboxes[i].checked = false;
+        // 取消最新勾選（從後面找最後一個剛選的）
+        const allCheckboxes = document.querySelectorAll('input[type="checkbox"]');
+        for(let i = allCheckboxes.length -1; i >=0; i--){
+          if(allCheckboxes[i].checked && !selectedCandidates.includes(allCheckboxes[i].value)){
+            allCheckboxes[i].checked = false;
             break;
           }
         }
-        // 重新更新選擇清單
-        selectedCandidates = [];
-        checkboxes.forEach(cb => {
-          if(cb.checked) selectedCandidates.push(cb.value);
-        });
+        // 更新選擇
+        updateSelection();
+        return;
       }
 
-      // 有勾選就啟用按鈕，沒勾選就禁用
-      document.getElementById("submit-vote").disabled = selectedCandidates.length === 0;
-    }
+      // 更新隱藏欄位的值（用逗號分隔）
+      document.getElementById('candidate-hidden').value = selectedCandidates.join(',');
 
-    document.getElementById("vote-form").onsubmit = function() {
-      // 把多選候選人填入隱藏 input
-      document.getElementById("candidate-hidden").value = selectedCandidates.join(", ");
-
-      alert("投票已提交！您選擇的候選人是：" + selectedCandidates.join(", "));
-
-      // 重置勾選和按鈕狀態
-      selectedCandidates = [];
-      const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-      checkboxes.forEach(cb => cb.checked = false);
-      document.getElementById("submit-vote").disabled = true;
+      // 有選擇至少一位候選人，啟用送出按鈕
+      document.getElementById('submit-vote').disabled = selectedCandidates.length === 0;
     }
   </script>
 </body>
