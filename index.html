@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>選舉投票</title>
+    <title>選舉投票（匿名）</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; text-align: center; }
         h1 { margin-bottom: 20px; }
@@ -64,6 +64,7 @@
             selectedCandidates = [];
             const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
             checkboxes.forEach(cb => selectedCandidates.push(cb.id));
+
             if (selectedCandidates.length > 11) {
                 alert("最多只能選擇 11 位候選人！");
                 document.getElementById(selectedCandidates[selectedCandidates.length - 1]).checked = false;
@@ -74,22 +75,26 @@
 
         async function submitVote() {
             if (selectedCandidates.length === 0) return;
+
             try {
                 const GAS_URL = "https://script.google.com/macros/s/AKfycbwgiPzR2XeLLj0K_kClzsriok9JeQtZuzfnBSm_kNTmgkhanbpASic5cpeABaMdtDip/exec";
-                // 逐個候選人送出
-                for (const candidateId of selectedCandidates) {
-                    const candidateName = candidateNames[candidateId];
-                    await fetch(GAS_URL, {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ user: "匿名", candidate: candidateName })
-                    });
-                }
-                alert("投票已提交！您選擇的候選人是：" + selectedCandidates.map(id => candidateNames[id]).join(", "));
+                
+                // 一次送出所有選項
+                const voteData = selectedCandidates.map(id => candidateNames[id]);
+                
+                await fetch(GAS_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ user: "匿名", candidate: voteData.join(", ") })
+                });
+
+                alert("投票已提交！您選擇的候選人是：" + voteData.join(", "));
+
                 // 清空勾選
                 selectedCandidates.forEach(id => document.getElementById(id).checked = false);
                 selectedCandidates = [];
                 document.getElementById("submit-vote").disabled = true;
+
             } catch (error) {
                 console.error(error);
                 alert("投票提交失敗，請稍後再試！");
