@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>選舉投票</title> <!-- 修改頁面標題 -->
+    <title>選舉投票</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -14,24 +14,22 @@
             text-align: center;
         }
 
-        /* 表格樣式 */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
+        /* 表單內部結構 */
+        .vote-form {
+            width: 80%;
+            margin: 0 auto;
         }
 
-        table, th, td {
-            border: 1px solid #ddd;
+        .candidate-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0;
         }
 
-        th, td {
-            padding: 10px;
+        .candidate-row span {
+            flex: 1;
             text-align: center;
-        }
-
-        th {
-            background-color: #f2f2f2;
         }
 
         .button {
@@ -40,24 +38,12 @@
             color: white;
             border: none;
             cursor: pointer;
-            margin-top: 20px;
+            display: block;
+            margin: 20px auto;
         }
 
         .button:disabled {
             background-color: #cccccc;
-        }
-
-        /* 禁止表單提交的樣式 */
-        .vote-form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .candidate-row {
-            display: flex;
-            justify-content: space-between;
-            margin: 5px 0;
         }
 
         .candidate-row input[type="checkbox"] {
@@ -69,57 +55,58 @@
     <h1>選舉投票</h1>
 
     <form id="vote-form" class="vote-form">
+        <!-- 這裡會生成所有候選人選項 -->
         <div id="candidates">
-            <!-- 動態生成候選人選項 -->
+            <!-- 下面這部分是樣例數據，你可以根據需要自行修改 -->
             <div class="candidate-row">
-                <span>教務主任</span><span>林招蓉</span><input type="checkbox" id="candidate1">
+                <span>教務主任</span><span>林招蓉</span><input type="checkbox" id="candidate1" onclick="updateSelection()">
             </div>
             <div class="candidate-row">
-                <span>學務主任</span><span>崔倩筠</span><input type="checkbox" id="candidate2">
+                <span>學務主任</span><span>崔倩筠</span><input type="checkbox" id="candidate2" onclick="updateSelection()">
             </div>
             <div class="candidate-row">
-                <span>總務主任</span><span>陳信劭</span><input type="checkbox" id="candidate3">
+                <span>總務主任</span><span>陳信劭</span><input type="checkbox" id="candidate3" onclick="updateSelection()">
             </div>
             <div class="candidate-row">
-                <span>輔導主任</span><span>陳鵬元</span><input type="checkbox" id="candidate4">
+                <span>輔導主任</span><span>陳鵬元</span><input type="checkbox" id="candidate4" onclick="updateSelection()">
             </div>
             <div class="candidate-row">
-                <span>教學組長</span><span>陳佩君</span><input type="checkbox" id="candidate5">
+                <span>教學組長</span><span>陳佩君</span><input type="checkbox" id="candidate5" onclick="updateSelection()">
             </div>
             <div class="candidate-row">
-                <span>衛生組長</span><span>吳佩蓁</span><input type="checkbox" id="candidate6">
+                <span>衛生組長</span><span>吳佩蓁</span><input type="checkbox" id="candidate6" onclick="updateSelection()">
             </div>
             <div class="candidate-row">
-                <span>訓育組長</span><span>朱韻儒</span><input type="checkbox" id="candidate7">
+                <span>訓育組長</span><span>朱韻儒</span><input type="checkbox" id="candidate7" onclick="updateSelection()">
             </div>
             <div class="candidate-row">
-                <span>體育組長</span><span>鄭仲哲</span><input type="checkbox" id="candidate8">
+                <span>體育組長</span><span>鄭仲哲</span><input type="checkbox" id="candidate8" onclick="updateSelection()">
             </div>
             <div class="candidate-row">
-                <span>生教組長</span><span>賴美樺</span><input type="checkbox" id="candidate9">
+                <span>生教組長</span><span>賴美樺</span><input type="checkbox" id="candidate9" onclick="updateSelection()">
             </div>
             <div class="candidate-row">
-                <span>出納組長</span><span>蔡梅燕</span><input type="checkbox" id="candidate10">
+                <span>出納組長</span><span>蔡梅燕</span><input type="checkbox" id="candidate10" onclick="updateSelection()">
             </div>
         </div>
-        <button type="button" class="button" id="submit-vote" onclick="submitVote()">提交投票</button>
+
+        <button type="button" class="button" id="submit-vote" onclick="submitVote()" disabled>提交投票</button>
     </form>
 
     <script>
-        // 用來儲存已選擇的候選人
         let selectedCandidates = [];
 
-        // 監聽每個選項的勾選事件
+        // 更新選擇的候選人
         function updateSelection() {
             selectedCandidates = [];
             const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
             checkboxes.forEach(checkbox => {
-                selectedCandidates.push(checkbox.id); // 儲存已選擇的候選人ID
+                selectedCandidates.push(checkbox.id);
             });
 
-            // 限制最多選擇 5 個
-            if (selectedCandidates.length > 5) {
-                alert("最多只能選擇 5 位候選人！");
+            // 限制最多選擇 11 個候選人
+            if (selectedCandidates.length > 11) {
+                alert("最多只能選擇 11 位候選人！");
                 document.getElementById(selectedCandidates[selectedCandidates.length - 1]).checked = false;
                 return;
             }
@@ -132,11 +119,6 @@
             alert("投票已提交！您選擇的候選人是：" + selectedCandidates.join(", "));
             // 在這裡可以加上數據儲存邏輯，如送往伺服器
         }
-
-        // 初始化：設定勾選框的事件監聽
-        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-            checkbox.addEventListener('change', updateSelection);
-        });
     </script>
 </body>
 </html>
