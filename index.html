@@ -3,29 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>選舉投票</title>  <!-- 修改頁面標題 -->
+    <title>選舉投票</title> <!-- 修改頁面標題 -->
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; }
         h1 { text-align: center; }
 
-        /* 新增：候選人區域的三欄顯示 */
+        /* 讓候選人以三欄方式顯示 */
         #candidates {
             display: grid;
             grid-template-columns: repeat(3, 1fr); /* 三欄佈局 */
-            gap: 20px; /* 欄與欄之間的間距 */
+            gap: 20px; /* 欄位間距 */
             margin-top: 20px;
         }
-        
+
         .candidate {
             display: flex;
             align-items: center;
             justify-content: flex-start;
         }
-        
+
         .candidate input {
             margin-right: 10px;
         }
-        
+
         .button { 
             padding: 10px 20px; 
             background-color: #4CAF50; 
@@ -34,6 +34,7 @@
             cursor: pointer; 
             margin-top: 20px;
         }
+
         .button:disabled { 
             background-color: #cccccc; 
         }
