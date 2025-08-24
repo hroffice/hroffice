@@ -78,7 +78,7 @@
             if (selectedCandidates.length === 0) return;
 
             try {
-                const GAS_URL = "https://script.google.com/macros/s/AKfycbyKULoCMjspCb7DjwsVCTSCxZepfG8XxJcDDSjqI5QdkZpBmupwLlG1YUyu1AEb0Iyr/exec";
+                const GAS_URL = "https://script.google.com/macros/s/AKfycbxt6Ef-Qpnak6WzQUZjrD-_hG7TsGBO7ZVJgfUvUP4FE7myN5X7BWwPyW8eC6aKtw8b/exec";
 
                 const voteData = selectedCandidates.map(id => candidateNames[id]);
 
@@ -92,6 +92,7 @@
 
                 alert("投票已提交！您選擇的候選人是：" + voteData.join(", ") + "\n" + result.result);
 
+                // 重置選擇
                 selectedCandidates.forEach(id => document.getElementById(id).checked = false);
                 selectedCandidates = [];
                 document.getElementById("submit-vote").disabled = true;
