@@ -19,7 +19,6 @@
       display: block;
     }
     .button:disabled { background-color: #ccc; }
-    /* Bigger checkboxes */
     input[type="checkbox"] {
       width: 24px;
       height: 24px;
@@ -32,12 +31,28 @@
       border-top: 2px solid #ddd;
       max-width: 80%;
       margin: 20px auto;
+      font-family: "標楷體", "PMingLiU", serif;
     }
     .remarks img {
       max-width: 150px;
       height: auto;
       float: right;
       margin-left: 20px;
+    }
+    .remarks li {
+      font-family: "標楷體", "PMingLiU", serif;
+    }
+    .remarks strong {
+      font-weight: bold;
+    }
+    .underline {
+      text-decoration: underline;
+    }
+    .red-text {
+      color: red;
+    }
+    .remarks .english-text {
+      font-family: "Times New Roman", Times, serif;
     }
   </style>
 </head>
@@ -84,15 +99,8 @@
         <tr><td>1年5班</td><td>黃淑萍</td><td><input type="checkbox" value="黃淑萍" onclick="updateSelection()"></td>
             <td>5年7班</td><td>施嶸旭</td><td><input type="checkbox" value="施嶸旭" onclick="updateSelection()"></td></tr>
         <tr><td>2年2班</td><td>温宜逢</td><td><input type="checkbox" value="温宜逢" onclick="updateSelection()"></td>
-            <td>6年1班</td><td>李佩珊</td><td><input type="checkbox" value="李佩珊" onclick="updateSelection()"></td></tr>
-        <tr><td>2年4班</td><td>許嘉舫</td><td><input type="checkbox" value="許嘉舫" onclick="updateSelection()"></td>
-            <td>6年2班</td><td>劉庭芬</td><td><input type="checkbox" value="劉庭芬" onclick="updateSelection()"></td></tr>
-        <tr><td>2年5班</td><td>鍾怡君</td><td><input type="checkbox" value="鍾怡君" onclick="updateSelection()"></td>
-            <td>6年3班</td><td>陳建婷</td><td><input type="checkbox" value="陳建婷" onclick="updateSelection()"></td></tr>
-        <tr><td>2年6班</td><td>蔡曉萍</td><td><input type="checkbox" value="蔡曉萍" onclick="updateSelection()"></td>
-            <td>6年5班</td><td>陳琪燕</td><td><input type="checkbox" value="陳琪燕" onclick="updateSelection()"></td></tr>
-        <tr><td>3年2班</td><td>劉子瑩</td><td><input type="checkbox" value="劉子瑩" onclick="updateSelection()"></td>
-            <td>6年6班</td><td>陳佩容</td><td><input type="checkbox" value="陳佩容" onclick="updateSelection()"></td></tr>
+            <td>6年1班</td><td>陳雅琳</td><td><input type="checkbox" value="陳雅琳" onclick="updateSelection()"></td></tr>
+      </tbody>
     </table>
 
     <input type="hidden" id="candidate-hidden" name="candidates">
@@ -104,8 +112,8 @@
     <ol>
       <li>任期：114年9月1日起至115年8月31日止。</li>
       <li>當然委員5人、票選委員8人，共13人。</li>
-      <li>當然委員：教務主任、學務主任、輔導主任、人事室主任、教師會代表(黃秀慧老師)等5人。</li>
-      <li>每張選票請圈選11人,依得票數決定票選委員（8人）及候補委員(4名)。</li>
+      <li><strong class="underline">當然委員：</strong>教務主任、學務主任、輔導主任、人事室主任、教師會代表(黃秀慧老師)等5人。</li>
+      <li><span class="red-text">每張選票請圈選11人, 依得票數決定票選委員（8人）及候補委員(4名)。</span></li>
       <li>每滿3人應有1人為未兼行政職務教師(本校至少4人)。</li>
       <li>任一性別委員應占委員總數三分之一以上，委員13人，男性、女性應各4人以上。</li>
       <li>本學年度委員：男性、女性各應4人以上，共計13人。</li>
