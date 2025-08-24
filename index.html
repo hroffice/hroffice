@@ -5,57 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>選舉投票</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            text-align: center;
-        }
-
-        h1 {
-            margin-bottom: 20px;
-        }
-
-        table {
-            width: 80%;
-            margin: 0 auto;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: center;
-        }
-
-        th {
-            background-color: #f4f4f4;
-        }
-
-        td input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-        }
-
-        .button {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-            display: block;
-            margin: 20px auto;
-        }
-
-        .button:disabled {
-            background-color: #cccccc;
-        }
+        body { font-family: Arial, sans-serif; margin: 20px; text-align: center; }
+        h1 { margin-bottom: 20px; }
+        table { width: 80%; margin: 0 auto; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: center; }
+        th { background-color: #f4f4f4; }
+        td input[type="checkbox"] { width: 20px; height: 20px; }
+        .button { padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer; display: block; margin: 20px auto; }
+        .button:disabled { background-color: #cccccc; }
     </style>
 </head>
 <body>
-    <h1>選舉投票</h1>
+    <h1>選舉投票（匿名）</h1>
 
     <form id="vote-form">
-        <!-- 表格顯示候選人 -->
         <table>
             <thead>
                 <tr>
@@ -65,36 +28,16 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>教務主任</td><td>林招蓉</td><td><input type="checkbox" id="candidate1" onclick="updateSelection()"></td>
-                </tr>
-                <tr>
-                    <td>學務主任</td><td>崔倩筠</td><td><input type="checkbox" id="candidate2" onclick="updateSelection()"></td>
-                </tr>
-                <tr>
-                    <td>總務主任</td><td>陳信劭</td><td><input type="checkbox" id="candidate3" onclick="updateSelection()"></td>
-                </tr>
-                <tr>
-                    <td>輔導主任</td><td>陳鵬元</td><td><input type="checkbox" id="candidate4" onclick="updateSelection()"></td>
-                </tr>
-                <tr>
-                    <td>教學組長</td><td>陳佩君</td><td><input type="checkbox" id="candidate5" onclick="updateSelection()"></td>
-                </tr>
-                <tr>
-                    <td>衛生組長</td><td>吳佩蓁</td><td><input type="checkbox" id="candidate6" onclick="updateSelection()"></td>
-                </tr>
-                <tr>
-                    <td>訓育組長</td><td>朱韻儒</td><td><input type="checkbox" id="candidate7" onclick="updateSelection()"></td>
-                </tr>
-                <tr>
-                    <td>體育組長</td><td>鄭仲哲</td><td><input type="checkbox" id="candidate8" onclick="updateSelection()"></td>
-                </tr>
-                <tr>
-                    <td>生教組長</td><td>賴美樺</td><td><input type="checkbox" id="candidate9" onclick="updateSelection()"></td>
-                </tr>
-                <tr>
-                    <td>出納組長</td><td>蔡梅燕</td><td><input type="checkbox" id="candidate10" onclick="updateSelection()"></td>
-                </tr>
+                <tr><td>教務主任</td><td>林招蓉</td><td><input type="checkbox" id="candidate1" onclick="updateSelection()"></td></tr>
+                <tr><td>學務主任</td><td>崔倩筠</td><td><input type="checkbox" id="candidate2" onclick="updateSelection()"></td></tr>
+                <tr><td>總務主任</td><td>陳信劭</td><td><input type="checkbox" id="candidate3" onclick="updateSelection()"></td></tr>
+                <tr><td>輔導主任</td><td>陳鵬元</td><td><input type="checkbox" id="candidate4" onclick="updateSelection()"></td></tr>
+                <tr><td>教學組長</td><td>陳佩君</td><td><input type="checkbox" id="candidate5" onclick="updateSelection()"></td></tr>
+                <tr><td>衛生組長</td><td>吳佩蓁</td><td><input type="checkbox" id="candidate6" onclick="updateSelection()"></td></tr>
+                <tr><td>訓育組長</td><td>朱韻儒</td><td><input type="checkbox" id="candidate7" onclick="updateSelection()"></td></tr>
+                <tr><td>體育組長</td><td>鄭仲哲</td><td><input type="checkbox" id="candidate8" onclick="updateSelection()"></td></tr>
+                <tr><td>生教組長</td><td>賴美樺</td><td><input type="checkbox" id="candidate9" onclick="updateSelection()"></td></tr>
+                <tr><td>出納組長</td><td>蔡梅燕</td><td><input type="checkbox" id="candidate10" onclick="updateSelection()"></td></tr>
             </tbody>
         </table>
 
@@ -102,30 +45,55 @@
     </form>
 
     <script>
+        const candidateNames = {
+            "candidate1": "林招蓉",
+            "candidate2": "崔倩筠",
+            "candidate3": "陳信劭",
+            "candidate4": "陳鵬元",
+            "candidate5": "陳佩君",
+            "candidate6": "吳佩蓁",
+            "candidate7": "朱韻儒",
+            "candidate8": "鄭仲哲",
+            "candidate9": "賴美樺",
+            "candidate10": "蔡梅燕"
+        };
+
         let selectedCandidates = [];
 
-        // 更新選擇的候選人
         function updateSelection() {
             selectedCandidates = [];
             const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-            checkboxes.forEach(checkbox => {
-                selectedCandidates.push(checkbox.id);
-            });
-
-            // 限制最多選擇 11 個候選人
+            checkboxes.forEach(cb => selectedCandidates.push(cb.id));
             if (selectedCandidates.length > 11) {
                 alert("最多只能選擇 11 位候選人！");
                 document.getElementById(selectedCandidates[selectedCandidates.length - 1]).checked = false;
                 return;
             }
-
             document.getElementById("submit-vote").disabled = selectedCandidates.length === 0;
         }
 
-        // 提交投票
-        function submitVote() {
-            alert("投票已提交！您選擇的候選人是：" + selectedCandidates.join(", "));
-            // 在這裡可以加上數據儲存邏輯，如送往伺服器
+        async function submitVote() {
+            if (selectedCandidates.length === 0) return;
+            try {
+                const GAS_URL = "https://script.google.com/macros/s/AKfycbwgiPzR2XeLLj0K_kClzsriok9JeQtZuzfnBSm_kNTmgkhanbpASic5cpeABaMdtDip/exec";
+                // 逐個候選人送出
+                for (const candidateId of selectedCandidates) {
+                    const candidateName = candidateNames[candidateId];
+                    await fetch(GAS_URL, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ user: "匿名", candidate: candidateName })
+                    });
+                }
+                alert("投票已提交！您選擇的候選人是：" + selectedCandidates.map(id => candidateNames[id]).join(", "));
+                // 清空勾選
+                selectedCandidates.forEach(id => document.getElementById(id).checked = false);
+                selectedCandidates = [];
+                document.getElementById("submit-vote").disabled = true;
+            } catch (error) {
+                console.error(error);
+                alert("投票提交失敗，請稍後再試！");
+            }
         }
     </script>
 </body>
