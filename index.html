@@ -20,16 +20,24 @@
             margin: 0 auto;
         }
 
-        .candidate-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 10px 0;
+        /* 表格樣式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
         }
 
-        .candidate-row span {
-            flex: 1;
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
             text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
         }
 
         .button {
@@ -45,50 +53,54 @@
         .button:disabled {
             background-color: #cccccc;
         }
-
-        .candidate-row input[type="checkbox"] {
-            margin-left: 10px;
-        }
     </style>
 </head>
 <body>
     <h1>選舉投票</h1>
 
     <form id="vote-form" class="vote-form">
-        <!-- 這裡會生成所有候選人選項 -->
-        <div id="candidates">
-            <!-- 下面這部分是樣例數據，你可以根據需要自行修改 -->
-            <div class="candidate-row">
-                <span>教務主任</span><span>林招蓉</span><input type="checkbox" id="candidate1" onclick="updateSelection()">
-            </div>
-            <div class="candidate-row">
-                <span>學務主任</span><span>崔倩筠</span><input type="checkbox" id="candidate2" onclick="updateSelection()">
-            </div>
-            <div class="candidate-row">
-                <span>總務主任</span><span>陳信劭</span><input type="checkbox" id="candidate3" onclick="updateSelection()">
-            </div>
-            <div class="candidate-row">
-                <span>輔導主任</span><span>陳鵬元</span><input type="checkbox" id="candidate4" onclick="updateSelection()">
-            </div>
-            <div class="candidate-row">
-                <span>教學組長</span><span>陳佩君</span><input type="checkbox" id="candidate5" onclick="updateSelection()">
-            </div>
-            <div class="candidate-row">
-                <span>衛生組長</span><span>吳佩蓁</span><input type="checkbox" id="candidate6" onclick="updateSelection()">
-            </div>
-            <div class="candidate-row">
-                <span>訓育組長</span><span>朱韻儒</span><input type="checkbox" id="candidate7" onclick="updateSelection()">
-            </div>
-            <div class="candidate-row">
-                <span>體育組長</span><span>鄭仲哲</span><input type="checkbox" id="candidate8" onclick="updateSelection()">
-            </div>
-            <div class="candidate-row">
-                <span>生教組長</span><span>賴美樺</span><input type="checkbox" id="candidate9" onclick="updateSelection()">
-            </div>
-            <div class="candidate-row">
-                <span>出納組長</span><span>蔡梅燕</span><input type="checkbox" id="candidate10" onclick="updateSelection()">
-            </div>
-        </div>
+        <!-- 表格：包含標題和候選人列表 -->
+        <table>
+            <thead>
+                <tr>
+                    <th>職（班）別</th>
+                    <th>姓名</th>
+                    <th>勾選</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>教務主任</td><td>林招蓉</td><td><input type="checkbox" id="candidate1" onclick="updateSelection()"></td>
+                </tr>
+                <tr>
+                    <td>學務主任</td><td>崔倩筠</td><td><input type="checkbox" id="candidate2" onclick="updateSelection()"></td>
+                </tr>
+                <tr>
+                    <td>總務主任</td><td>陳信劭</td><td><input type="checkbox" id="candidate3" onclick="updateSelection()"></td>
+                </tr>
+                <tr>
+                    <td>輔導主任</td><td>陳鵬元</td><td><input type="checkbox" id="candidate4" onclick="updateSelection()"></td>
+                </tr>
+                <tr>
+                    <td>教學組長</td><td>陳佩君</td><td><input type="checkbox" id="candidate5" onclick="updateSelection()"></td>
+                </tr>
+                <tr>
+                    <td>衛生組長</td><td>吳佩蓁</td><td><input type="checkbox" id="candidate6" onclick="updateSelection()"></td>
+                </tr>
+                <tr>
+                    <td>訓育組長</td><td>朱韻儒</td><td><input type="checkbox" id="candidate7" onclick="updateSelection()"></td>
+                </tr>
+                <tr>
+                    <td>體育組長</td><td>鄭仲哲</td><td><input type="checkbox" id="candidate8" onclick="updateSelection()"></td>
+                </tr>
+                <tr>
+                    <td>生教組長</td><td>賴美樺</td><td><input type="checkbox" id="candidate9" onclick="updateSelection()"></td>
+                </tr>
+                <tr>
+                    <td>出納組長</td><td>蔡梅燕</td><td><input type="checkbox" id="candidate10" onclick="updateSelection()"></td>
+                </tr>
+            </tbody>
+        </table>
 
         <button type="button" class="button" id="submit-vote" onclick="submitVote()" disabled>提交投票</button>
     </form>
