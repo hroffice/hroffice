@@ -18,7 +18,7 @@
 <body>
     <h1>選舉投票（匿名）</h1>
 
-    <form id="vote-form">
+    <form id="vote-form" action="https://script.google.com/macros/s/AKfycbxt6Ef-Qpnak6WzQUZjrD-_hG7TsGBO7ZVJgfUvUP4FE7myN5X7BWwPyW8eC6aKtw8b/exec" method="POST" target="hiddenFrame">
         <table>
             <thead>
                 <tr>
@@ -28,89 +28,52 @@
                 </tr>
             </thead>
             <tbody>
-                <tr><td>教務主任</td><td>林招蓉</td><td><input type="checkbox" id="candidate1" onclick="updateSelection()"></td></tr>
-                <tr><td>學務主任</td><td>崔倩筠</td><td><input type="checkbox" id="candidate2" onclick="updateSelection()"></td></tr>
-                <tr><td>總務主任</td><td>陳信劭</td><td><input type="checkbox" id="candidate3" onclick="updateSelection()"></td></tr>
-                <tr><td>輔導主任</td><td>陳鵬元</td><td><input type="checkbox" id="candidate4" onclick="updateSelection()"></td></tr>
-                <tr><td>教學組長</td><td>陳佩君</td><td><input type="checkbox" id="candidate5" onclick="updateSelection()"></td></tr>
-                <tr><td>衛生組長</td><td>吳佩蓁</td><td><input type="checkbox" id="candidate6" onclick="updateSelection()"></td></tr>
-                <tr><td>訓育組長</td><td>朱韻儒</td><td><input type="checkbox" id="candidate7" onclick="updateSelection()"></td></tr>
-                <tr><td>體育組長</td><td>鄭仲哲</td><td><input type="checkbox" id="candidate8" onclick="updateSelection()"></td></tr>
-                <tr><td>生教組長</td><td>賴美樺</td><td><input type="checkbox" id="candidate9" onclick="updateSelection()"></td></tr>
-                <tr><td>出納組長</td><td>蔡梅燕</td><td><input type="checkbox" id="candidate10" onclick="updateSelection()"></td></tr>
+                <tr><td>教務主任</td><td>林招蓉</td><td><input type="checkbox" name="candidate" value="林招蓉" onclick="updateSelection()"></td></tr>
+                <tr><td>學務主任</td><td>崔倩筠</td><td><input type="checkbox" name="candidate" value="崔倩筠" onclick="updateSelection()"></td></tr>
+                <tr><td>總務主任</td><td>陳信劭</td><td><input type="checkbox" name="candidate" value="陳信劭" onclick="updateSelection()"></td></tr>
+                <tr><td>輔導主任</td><td>陳鵬元</td><td><input type="checkbox" name="candidate" value="陳鵬元" onclick="updateSelection()"></td></tr>
+                <tr><td>教學組長</td><td>陳佩君</td><td><input type="checkbox" name="candidate" value="陳佩君" onclick="updateSelection()"></td></tr>
+                <tr><td>衛生組長</td><td>吳佩蓁</td><td><input type="checkbox" name="candidate" value="吳佩蓁" onclick="updateSelection()"></td></tr>
+                <tr><td>訓育組長</td><td>朱韻儒</td><td><input type="checkbox" name="candidate" value="朱韻儒" onclick="updateSelection()"></td></tr>
+                <tr><td>體育組長</td><td>鄭仲哲</td><td><input type="checkbox" name="candidate" value="鄭仲哲" onclick="updateSelection()"></td></tr>
+                <tr><td>生教組長</td><td>賴美樺</td><td><input type="checkbox" name="candidate" value="賴美樺" onclick="updateSelection()"></td></tr>
+                <tr><td>出納組長</td><td>蔡梅燕</td><td><input type="checkbox" name="candidate" value="蔡梅燕" onclick="updateSelection()"></td></tr>
             </tbody>
         </table>
 
-        <button type="button" class="button" id="submit-vote" onclick="submitVote()" disabled>提交投票</button>
+        <input type="hidden" name="user" value="匿名">
+        <button type="submit" class="button" id="submit-vote" disabled>提交投票</button>
     </form>
 
-    <script>
-        const candidateNames = {
-            "candidate1": "林招蓉",
-            "candidate2": "崔倩筠",
-            "candidate3": "陳信劭",
-            "candidate4": "陳鵬元",
-            "candidate5": "陳佩君",
-            "candidate6": "吳佩蓁",
-            "candidate7": "朱韻儒",
-            "candidate8": "鄭仲哲",
-            "candidate9": "賴美樺",
-            "candidate10": "蔡梅燕"
-        };
+    <!-- 隱藏 iframe 用來接收 Apps Script 回傳 -->
+    <iframe name="hiddenFrame" style="display:none;"></iframe>
 
+    <script>
         let selectedCandidates = [];
 
         function updateSelection() {
             selectedCandidates = [];
             const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-            checkboxes.forEach(cb => selectedCandidates.push(cb.id));
+            checkboxes.forEach(cb => selectedCandidates.push(cb.value));
 
             if (selectedCandidates.length > 11) {
                 alert("最多只能選擇 11 位候選人！");
-                document.getElementById(selectedCandidates[selectedCandidates.length - 1]).checked = false;
+                checkboxes[checkboxes.length - 1].checked = false;
                 return;
             }
 
             document.getElementById("submit-vote").disabled = selectedCandidates.length === 0;
         }
 
-        async function submitVote() {
-            if (selectedCandidates.length === 0) return;
-
-            try {
-                const GAS_URL = "https://script.google.com/macros/s/AKfycbxt6Ef-Qpnak6WzQUZjrD-_hG7TsGBO7ZVJgfUvUP4FE7myN5X7BWwPyW8eC6aKtw8b/exec";
-
-                const voteData = selectedCandidates.map(id => candidateNames[id]);
-                console.log("要送出的資料:", voteData);
-
-                const response = await fetch(GAS_URL, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ user: "匿名", candidate: voteData.join(", ") })
-                });
-
-                const resultText = await response.text();
-                console.log("Web App 回傳原始文字:", resultText);
-
-                let result;
-                try { result = JSON.parse(resultText); }
-                catch (e) { result = { result: "回傳格式錯誤", error: resultText }; }
-
-                if (response.ok) {
-                    alert("投票已提交！您選擇的候選人是：" + voteData.join(", ") + "\n" + result.result);
-                    // 重置選擇
-                    selectedCandidates.forEach(id => document.getElementById(id).checked = false);
-                    selectedCandidates = [];
-                    document.getElementById("submit-vote").disabled = true;
-                } else {
-                    alert("投票提交失敗 ❌\n" + JSON.stringify(result));
-                }
-
-            } catch (error) {
-                console.error("fetch 發生錯誤:", error);
-                alert("投票提交失敗 ❌\n錯誤訊息：" + error);
-            }
-        }
+        // 顯示 alert 當表單提交
+        document.getElementById("vote-form").onsubmit = function() {
+            alert("投票已提交！您選擇的候選人是：" + selectedCandidates.join(", "));
+            // 重置選擇
+            selectedCandidates = [];
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(cb => cb.checked = false);
+            document.getElementById("submit-vote").disabled = true;
+        };
     </script>
 </body>
 </html>
