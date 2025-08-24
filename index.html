@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>嘉義市東區興安國民小學114學年度教師成績考核委員會選舉選票</title>
   <style>
-    body { font-family: Arial; text-align: center; margin: 20px; }
+    body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
     table { width: 80%; margin: 0 auto; border-collapse: collapse; }
     th, td { border: 1px solid #ddd; padding: 12px; }
     th { background-color: #f4f4f4; }
@@ -25,20 +25,22 @@
       height: 24px;
       cursor: pointer;
     }
-    /* Red text for specific rule */
-    .red-text {
-      color: red;
+    /* Custom styles for the remarks section */
+    .remarks {
+      text-align: left;
+      font-family: "標楷體", "serif";
+      margin-top: 20px;
+      font-size: 14px;
     }
-    /* Font settings for the instructions */
-    .notes {
-      font-family: "標楷體", "KaiTi", serif;
+    .remarks span {
+      font-family: "Times New Roman", serif;
     }
-    .notes .highlight {
+    .highlight {
       font-weight: bold;
       text-decoration: underline;
     }
-    .english-text {
-      font-family: "Times New Roman", Times, serif;
+    .highlight-red {
+      color: red;
     }
   </style>
 </head>
@@ -86,10 +88,8 @@
             <td>5年7班</td><td>施嶸旭</td><td><input type="checkbox" value="施嶸旭" onclick="updateSelection()"></td></tr>
         <tr><td>2年2班</td><td>温宜逢</td><td><input type="checkbox" value="温宜逢" onclick="updateSelection()"></td>
             <td>6年1班</td><td>李佩珊</td><td><input type="checkbox" value="李佩珊" onclick="updateSelection()"></td></tr>
-        <tr><td>2年4班</td><td>許嘉舫</td><td><input type="checkbox" value="許嘉舫" onclick="updateSelection()"></td>
-            <td>6年2班</td><td>鄭雅婷</td><td><input type="checkbox" value="鄭雅婷" onclick="updateSelection()"></td></tr>
-        <tr><td>2年5班</td><td>江雅婷</td><td><input type="checkbox" value="江雅婷" onclick="updateSelection()"></td>
-            <td>6年3班</td><td>邱依蓉</td><td><input type="checkbox" value="邱依蓉" onclick="updateSelection()"></td></tr>
+        <tr><td>2年4班</td><td>鄭正緯</td><td><input type="checkbox" value="鄭正緯" onclick="updateSelection()"></td>
+            <td>6年2班</td><td>劉怡君</td><td><input type="checkbox" value="劉怡君" onclick="updateSelection()"></td></tr>
       </tbody>
     </table>
 
@@ -101,23 +101,15 @@
   <!-- 隱藏 iframe 接收 Web App 回傳 -->
   <iframe name="hiddenFrame" style="display:none;"></iframe>
 
-  <!-- Notes Section -->
-  <div class="notes">
-    <p>備註：</p>
-    <ul>
-      <li>1.任期：114年9月1日起至115年8月31日止。</li>
-      <li>2.當然委員5人、票選委員8人，共13人。</li>
-      <li>3.當然委員：教務主任、學務主任、輔導主任、人事室主任、教師會代表(<span class="highlight">黃秀慧老師</span>)等5人。</li>
-      <li>4.<span class="red-text">每張選票請圈選11人, 依得票數決定票選委員（8人）及候補委員(4名)。</span></li>
-      <li>5.每滿3人應有1人為未兼行政職務教師(本校至少4人)。</li>
-      <li>6.任一性別委員應占委員總數三分之一以上，委員13人，男性、女性應各4人以上。</li>
-      <li>7.本學年度委員：男性、女性各應4人以上，共計13人。</li>
-    </ul>
-  </div>
-
-  <!-- Image Section -->
-  <div>
-    <img src="https://drive.google.com/uc?export=view&id=1a5gRcpKRQWDU553IUiEXxTeDtVNxifKc" alt="Election Instructions" style="width: 200px; height: auto; float: right; margin-top: 20px;" />
+  <div class="remarks">
+    <p><span>備註：</span></p>
+    <p>1.任期：114年9月1日起至115年8月31日止。</p>
+    <p>2.當然委員5人、票選委員8人，共13人。</p>
+    <p>3.當然委員：<span class="highlight">教務主任、學務主任、輔導主任、人事室主任、教師會代表(黃秀慧老師)</span>等5人。</p>
+    <p>4.<span class="highlight-red">每張選票請圈選11人</span>, 依得票數決定票選委員（8人）及候補委員(4名)。</p>
+    <p>5.每滿3人應有1人為未兼行政職務教師(本校至少4人)。</p>
+    <p>6.任一性別委員應占委員總數三分之一以上，委員13人，男性、女性應各4人以上。</p>
+    <p>7.本學年度委員：男性、女性各應4人以上，共計13人。</p>
   </div>
 
   <script>
@@ -128,34 +120,10 @@
       const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
       checkboxes.forEach(cb => selectedCandidates.push(cb.value));
 
-      if (selectedCandidates.length > 11) {
-        alert("最多只能選擇 11 位候選人！");
-        // 取消最新勾選
-        const allCheckboxes = document.querySelectorAll('input[type="checkbox"]');
-        for (let i = allCheckboxes.length - 1; i >= 0; i--) {
-          if (allCheckboxes[i].checked && !selectedCandidates.includes(allCheckboxes[i].value)) {
-            allCheckboxes[i].checked = false;
-            break;
-          }
-        }
-        return;
-      }
+      // Enable the submit button when at least one candidate is selected
+      document.getElementById('submit-vote').disabled = selectedCandidates.length === 0;
 
-      // Enable or disable submit button
-      document.getElementById("submit-vote").disabled = selectedCandidates.length === 0 || selectedCandidates.length > 11;
-    }
-
-    document.getElementById("vote-form").onsubmit = function() {
-      // 把多選候選人填入隱藏 input
-      document.getElementById("candidate-hidden").value = selectedCandidates.join(", ");
-
-      alert("投票已提交！您選擇的候選人是：" + selectedCandidates.join(", "));
-
-      // 重置勾選
-      selectedCandidates = [];
-      const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-      checkboxes.forEach(cb => cb.checked = false);
-      document.getElementById("submit-vote").disabled = true;
+      document.getElementById('candidate-hidden').value = selectedCandidates.join(", ");
     }
   </script>
 </body>
