@@ -16,26 +16,27 @@
 <body>
   <h1>選舉投票（匿名）</h1>
 
-  <form id="vote-form" action="https://script.google.com/macros/s/AKfycbyTIijsZzwiqRehr0G5WBolNwgTfBsakVr5ZBoDO62AxCrYTPvDMhsoRdzwe3nU6UpA/exec" method="POST" target="hiddenFrame">
+  <form id="vote-form" action="https://script.google.com/macros/s/AKfycbxtqxTRFWx7Xnsog2gEhnMQogYOQtnzxDC6SavsviHJiP4kOXdf_iMViuglIF7QPMcn-g/exec" method="POST" target="hiddenFrame">
     <table>
       <thead>
         <tr><th>職（班）別</th><th>姓名</th><th>勾選</th></tr>
       </thead>
       <tbody>
-        <tr><td>教務主任</td><td>林招蓉</td><td><input type="checkbox" name="candidate" value="林招蓉" onclick="updateSelection()"></td></tr>
-        <tr><td>學務主任</td><td>崔倩筠</td><td><input type="checkbox" name="candidate" value="崔倩筠" onclick="updateSelection()"></td></tr>
-        <tr><td>總務主任</td><td>陳信劭</td><td><input type="checkbox" name="candidate" value="陳信劭" onclick="updateSelection()"></td></tr>
-        <tr><td>輔導主任</td><td>陳鵬元</td><td><input type="checkbox" name="candidate" value="陳鵬元" onclick="updateSelection()"></td></tr>
-        <tr><td>教學組長</td><td>陳佩君</td><td><input type="checkbox" name="candidate" value="陳佩君" onclick="updateSelection()"></td></tr>
-        <tr><td>衛生組長</td><td>吳佩蓁</td><td><input type="checkbox" name="candidate" value="吳佩蓁" onclick="updateSelection()"></td></tr>
-        <tr><td>訓育組長</td><td>朱韻儒</td><td><input type="checkbox" name="candidate" value="朱韻儒" onclick="updateSelection()"></td></tr>
-        <tr><td>體育組長</td><td>鄭仲哲</td><td><input type="checkbox" name="candidate" value="鄭仲哲" onclick="updateSelection()"></td></tr>
-        <tr><td>生教組長</td><td>賴美樺</td><td><input type="checkbox" name="candidate" value="賴美樺" onclick="updateSelection()"></td></tr>
-        <tr><td>出納組長</td><td>蔡梅燕</td><td><input type="checkbox" name="candidate" value="蔡梅燕" onclick="updateSelection()"></td></tr>
+        <tr><td>教務主任</td><td>林招蓉</td><td><input type="checkbox" value="林招蓉" onclick="updateSelection()"></td></tr>
+        <tr><td>學務主任</td><td>崔倩筠</td><td><input type="checkbox" value="崔倩筠" onclick="updateSelection()"></td></tr>
+        <tr><td>總務主任</td><td>陳信劭</td><td><input type="checkbox" value="陳信劭" onclick="updateSelection()"></td></tr>
+        <tr><td>輔導主任</td><td>陳鵬元</td><td><input type="checkbox" value="陳鵬元" onclick="updateSelection()"></td></tr>
+        <tr><td>教學組長</td><td>陳佩君</td><td><input type="checkbox" value="陳佩君" onclick="updateSelection()"></td></tr>
+        <tr><td>衛生組長</td><td>吳佩蓁</td><td><input type="checkbox" value="吳佩蓁" onclick="updateSelection()"></td></tr>
+        <tr><td>訓育組長</td><td>朱韻儒</td><td><input type="checkbox" value="朱韻儒" onclick="updateSelection()"></td></tr>
+        <tr><td>體育組長</td><td>鄭仲哲</td><td><input type="checkbox" value="鄭仲哲" onclick="updateSelection()"></td></tr>
+        <tr><td>生教組長</td><td>賴美樺</td><td><input type="checkbox" value="賴美樺" onclick="updateSelection()"></td></tr>
+        <tr><td>出納組長</td><td>蔡梅燕</td><td><input type="checkbox" value="蔡梅燕" onclick="updateSelection()"></td></tr>
       </tbody>
     </table>
 
     <input type="hidden" name="user" value="匿名">
+    <input type="hidden" name="candidate" id="candidate-hidden">
     <button type="submit" class="button" id="submit-vote" disabled>提交投票</button>
   </form>
 
@@ -60,7 +61,11 @@
     }
 
     document.getElementById("vote-form").onsubmit = function() {
+      // 把多選候選人填入隱藏 input
+      document.getElementById("candidate-hidden").value = selectedCandidates.join(", ");
+
       alert("投票已提交！您選擇的候選人是：" + selectedCandidates.join(", "));
+
       // 重置勾選
       selectedCandidates = [];
       const checkboxes = document.querySelectorAll('input[type="checkbox"]');
