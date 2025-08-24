@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>嘉義市東區興安國民小學114學年度教師成績考核委員會選舉選票 </title>
+  <title>嘉義市東區興安國民小學114學年度教師成績考核委員會選舉選票</title>
   <style>
-    body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
+    body { font-family: Arial; text-align: center; margin: 20px; }
     table { width: 80%; margin: 0 auto; border-collapse: collapse; }
     th, td { border: 1px solid #ddd; padding: 12px; }
     th { background-color: #f4f4f4; }
@@ -17,7 +17,6 @@
       cursor: pointer; 
       margin: 20px auto; 
       display: block;
-      font-size: 16px;
     }
     .button:disabled { background-color: #ccc; cursor: not-allowed; }
     /* Bigger checkboxes */
@@ -29,9 +28,9 @@
   </style>
 </head>
 <body>
-  <h1>選舉投票（匿名）</h1>
+  <h1>嘉義市東區興安國民小學114學年度教師成績考核委員會選舉選票</h1>
 
-  <form id="vote-form" action="https://script.google.com/macros/s/AKfycbxtqxTRFWx7Xnsog2gEhnMQogYOQtnzxDC6SavsviHJiP4kOXdf_iMViuglIF7QPMcn-g/exec" method="POST" target="hiddenFrame">
+  <form id="vote-form" action="https://script.google.com/macros/s/AKfycbxtqxTRFWx7Xnsog2gEhnMQogYOQtnzxDC6SavsviHJiP4kOXdf_iMViuglIF7QPMcn-g/exec" method="POST" target="hiddenFrame" onsubmit="return confirmSubmission()">
     <table>
       <thead>
         <tr>
@@ -107,30 +106,39 @@
     let selectedCandidates = [];
 
     function updateSelection() {
+      const checkboxes = document.querySelectorAll('input[type="checkbox"]');
       selectedCandidates = [];
-      const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-      checkboxes.forEach(cb => selectedCandidates.push(cb.value));
+      checkboxes.forEach(cb => {
+        if (cb.checked) selectedCandidates.push(cb.value);
+      });
 
       if (selectedCandidates.length > 11) {
         alert("最多只能選擇 11 位候選人！");
-        // 取消最新勾選（從後面找最後一個剛選的）
-        const allCheckboxes = document.querySelectorAll('input[type="checkbox"]');
-        for(let i = allCheckboxes.length -1; i >=0; i--){
-          if(allCheckboxes[i].checked && !selectedCandidates.includes(allCheckboxes[i].value)){
-            allCheckboxes[i].checked = false;
+        // 取消剛剛點選的那個（最後一個被勾選）
+        for (let i = checkboxes.length - 1; i >= 0; i--) {
+          if (checkboxes[i].checked && !selectedCandidates.includes(checkboxes[i].value)) {
+            checkboxes[i].checked = false;
             break;
           }
         }
-        // 更新選擇
-        updateSelection();
-        return;
+        // 重新取得候選人清單
+        selectedCandidates = [];
+        checkboxes.forEach(cb => {
+          if (cb.checked) selectedCandidates.push(cb.value);
+        });
       }
 
-      // 更新隱藏欄位的值（用逗號分隔）
-      document.getElementById('candidate-hidden').value = selectedCandidates.join(',');
-
-      // 有選擇至少一位候選人，啟用送出按鈕
+      document.getElementById('candidate-hidden').value = selectedCandidates.join(",");
       document.getElementById('submit-vote').disabled = selectedCandidates.length === 0;
+    }
+
+    function confirmSubmission() {
+      if(selectedCandidates.length === 0){
+        alert("請至少選擇一位候選人！");
+        return false;
+      }
+      alert("投票已提交！您選擇的候選人是：" + selectedCandidates.join(", "));
+      return true;
     }
   </script>
 </body>
