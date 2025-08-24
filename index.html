@@ -70,6 +70,7 @@
                 document.getElementById(selectedCandidates[selectedCandidates.length - 1]).checked = false;
                 return;
             }
+
             document.getElementById("submit-vote").disabled = selectedCandidates.length === 0;
         }
 
@@ -77,20 +78,20 @@
             if (selectedCandidates.length === 0) return;
 
             try {
-                const GAS_URL = "https://script.google.com/macros/s/AKfycbwgiPzR2XeLLj0K_kClzsriok9JeQtZuzfnBSm_kNTmgkhanbpASic5cpeABaMdtDip/exec";
-                
-                // 一次送出所有選項
+                const GAS_URL = "https://script.google.com/macros/s/AKfycbzjdnfei2eNqkBG_72x40-5YsF4WGg58gm_lKrnyLPSO6XQtolbPSQOth4UbeY1gnn2/exec";
+
                 const voteData = selectedCandidates.map(id => candidateNames[id]);
-                
-                await fetch(GAS_URL, {
+
+                const response = await fetch(GAS_URL, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ user: "匿名", candidate: voteData.join(", ") })
                 });
 
-                alert("投票已提交！您選擇的候選人是：" + voteData.join(", "));
+                const result = await response.json();
 
-                // 清空勾選
+                alert("投票已提交！您選擇的候選人是：" + voteData.join(", ") + "\n" + result.result);
+
                 selectedCandidates.forEach(id => document.getElementById(id).checked = false);
                 selectedCandidates = [];
                 document.getElementById("submit-vote").disabled = true;
