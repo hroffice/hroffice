@@ -1,16 +1,42 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>選舉投票（匿名）</title>
   <style>
-    body { font-family: Arial; text-align: center; margin: 20px; }
-    table { width: 80%; margin: 0 auto; border-collapse: collapse; }
-    th, td { border: 1px solid #ddd; padding: 12px; }
-    th { background-color: #f4f4f4; }
-    .button { padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer; margin: 20px auto; display: block; }
-    .button:disabled { background-color: #ccc; }
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 20px;
+    }
+    table {
+      width: 80%;
+      margin: 0 auto;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+      vertical-align: middle;
+    }
+    th {
+      background-color: #f4f4f4;
+    }
+    .button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin: 20px auto;
+      display: block;
+    }
+    .button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
   </style>
 </head>
 <body>
@@ -19,19 +45,57 @@
   <form id="vote-form" action="https://script.google.com/macros/s/AKfycbxtqxTRFWx7Xnsog2gEhnMQogYOQtnzxDC6SavsviHJiP4kOXdf_iMViuglIF7QPMcn-g/exec" method="POST" target="hiddenFrame">
     <table>
       <thead>
-        <tr><th>職（班）別</th><th>姓名</th><th>勾選</th></tr>
+        <tr>
+          <th>職（班）別</th><th>姓名</th><th>勾選</th>
+          <th>職（班）別</th><th>姓名</th><th>勾選</th>
+        </tr>
       </thead>
       <tbody>
-        <tr><td>教務主任</td><td>林招蓉</td><td><input type="checkbox" value="林招蓉" onclick="updateSelection()"></td></tr>
-        <tr><td>學務主任</td><td>崔倩筠</td><td><input type="checkbox" value="崔倩筠" onclick="updateSelection()"></td></tr>
-        <tr><td>總務主任</td><td>陳信劭</td><td><input type="checkbox" value="陳信劭" onclick="updateSelection()"></td></tr>
-        <tr><td>輔導主任</td><td>陳鵬元</td><td><input type="checkbox" value="陳鵬元" onclick="updateSelection()"></td></tr>
-        <tr><td>教學組長</td><td>陳佩君</td><td><input type="checkbox" value="陳佩君" onclick="updateSelection()"></td></tr>
-        <tr><td>衛生組長</td><td>吳佩蓁</td><td><input type="checkbox" value="吳佩蓁" onclick="updateSelection()"></td></tr>
-        <tr><td>訓育組長</td><td>朱韻儒</td><td><input type="checkbox" value="朱韻儒" onclick="updateSelection()"></td></tr>
-        <tr><td>體育組長</td><td>鄭仲哲</td><td><input type="checkbox" value="鄭仲哲" onclick="updateSelection()"></td></tr>
-        <tr><td>生教組長</td><td>賴美樺</td><td><input type="checkbox" value="賴美樺" onclick="updateSelection()"></td></tr>
-        <tr><td>出納組長</td><td>蔡梅燕</td><td><input type="checkbox" value="蔡梅燕" onclick="updateSelection()"></td></tr>
+        <tr>
+          <td>教務主任</td>
+          <td>林招蓉</td>
+          <td><input type="checkbox" value="林招蓉" onclick="updateSelection()"></td>
+
+          <td>衛生組長</td>
+          <td>吳佩蓁</td>
+          <td><input type="checkbox" value="吳佩蓁" onclick="updateSelection()"></td>
+        </tr>
+        <tr>
+          <td>學務主任</td>
+          <td>崔倩筠</td>
+          <td><input type="checkbox" value="崔倩筠" onclick="updateSelection()"></td>
+
+          <td>訓育組長</td>
+          <td>朱韻儒</td>
+          <td><input type="checkbox" value="朱韻儒" onclick="updateSelection()"></td>
+        </tr>
+        <tr>
+          <td>總務主任</td>
+          <td>陳信劭</td>
+          <td><input type="checkbox" value="陳信劭" onclick="updateSelection()"></td>
+
+          <td>體育組長</td>
+          <td>鄭仲哲</td>
+          <td><input type="checkbox" value="鄭仲哲" onclick="updateSelection()"></td>
+        </tr>
+        <tr>
+          <td>輔導主任</td>
+          <td>陳鵬元</td>
+          <td><input type="checkbox" value="陳鵬元" onclick="updateSelection()"></td>
+
+          <td>生教組長</td>
+          <td>賴美樺</td>
+          <td><input type="checkbox" value="賴美樺" onclick="updateSelection()"></td>
+        </tr>
+        <tr>
+          <td>教學組長</td>
+          <td>陳佩君</td>
+          <td><input type="checkbox" value="陳佩君" onclick="updateSelection()"></td>
+
+          <td>出納組長</td>
+          <td>蔡梅燕</td>
+          <td><input type="checkbox" value="蔡梅燕" onclick="updateSelection()"></td>
+        </tr>
       </tbody>
     </table>
 
@@ -53,7 +117,10 @@
 
       if (selectedCandidates.length > 11) {
         alert("最多只能選擇 11 位候選人！");
-        checkboxes[checkboxes.length - 1].checked = false;
+        // 取消最後勾選
+        const lastChecked = event.target;
+        lastChecked.checked = false;
+        updateSelection();  // 重新整理勾選狀態
         return;
       }
 
