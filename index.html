@@ -145,6 +145,9 @@
     // 提交前顯示選擇的候選人
     document.getElementById("vote-form").onsubmit = function(event) {
       event.preventDefault();
+
+    　document.getElementById("candidate-hidden").value = selectedCandidates.join(", ");
+
       alert("投票已提交！您選擇的候選人是：" + selectedCandidates.join(", "));
       this.submit();
     };
